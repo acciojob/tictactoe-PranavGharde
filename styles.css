@@ -1,7 +1,42 @@
 body {
-    padding: 20px;
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
+  padding: 20px;
+  background-color: #fefefe;
 }
 
-tr:hover {
-    background-color: #f9f9f9;
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 5px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background-color: #f0f0f0;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
 }
