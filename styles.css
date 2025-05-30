@@ -1,1 +1,73 @@
-/*  your css code here. If applicable */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+h1 {
+  font-family: 'Permanent Marker', cursive;
+}
+
+input {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 200px;
+  border: 1px solid #000;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 30px;
+  font-size: 18px;
+  border: 2px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 2px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  font-size: 48px;
+  font-family: 'Permanent Marker', cursive;
+  background-color: pink;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.message {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.winning-cell {
+  background-color: purple !important;
+  color: white;
+}

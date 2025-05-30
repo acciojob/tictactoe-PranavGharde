@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 
-<html>
+<html lang = "en">
 
 <head>
+	<meta charset = "utf-8" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Tic Tac Toe</title>
 	<link rel="stylesheet" href="styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-	<!-- the entire body must be written by student -->
+	<div class = "container">
+		 <div class="container">
+    <div id="start-screen">
+      <h1>Tic Tac Toe</h1>
+      <label>Player 1
+        <input type="text" id="player-1" placeholder="enter name" />
+      </label><br />
+      <label>Player 2
+        <input type="text" id="player-2" placeholder="enter name" />
+      </label><br />
+      <button id="submit">Start Game</button>
+    </div>
+
+			 <div id = "game-screen" class = "hidden">
+				 <h1>Tic Tac Toe</h1>
+				 <div class = "message"></div>
+				 <div class = "board" id ="board"> </div>
+			 </div>
+		 </div>
+			
     <script type="text/javascript" src="./script.js">
 </script>
 
