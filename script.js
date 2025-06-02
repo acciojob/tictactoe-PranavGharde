@@ -1,69 +1,85 @@
-const submitBtn = document.getElementById('submit');
-const player1Input = document.getElementById('player-1');
-const player2Input = document.getElementById('player-2');
-const messageDiv = document.querySelector('.message');
-const board = document.getElementById('board');
-const cells = document.querySelectorAll('.cell');
+const startScreen = document.getElementById("start-screen");
+const gameBoard = document.getElementById("game-board");
+const messageDiv = document.querySelector(".message");
+const submitBtn = document.getElementById("submit");
 
-let currentPlayer = 'X';
-let players = {};
-let boardState = Array(9).fill('');
+const player1Input = document.getElementById("player1");
+const player2Input = document.getElementById("player2");
+const cells = document.querySelectorAll(".cell");
+
+let currentPlayer = "x";
+let board = ["", "", "", "", "", "", "", "", ""];
+let playerNames = { x: "", o: "" };
 let gameActive = true;
 
-const winningCombos = [
-  [0,1,2], [3,4,5], [6,7,8],
-  [0,3,6], [1,4,7], [2,5,8],
-  [0,4,8], [2,4,6]
+const winPatterns = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
 ];
 
-submitBtn.addEventListener('click', () => {
-  const p1 = player1Input.value.trim();
-  const p2 = player2Input.value.trim();
-  if (!p1 || !p2) {
-    alert('Please enter names for both players.');
+function checkWinner() {
+  for (const pattern of winPatterns) {
+    const [a, b, c] = pattern;
+    if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+      return pattern;
+    }
+  }
+  return null;
+}
+
+function handleClick(e) {
+  const id = parseInt(e.target.id) - 1;
+
+  if (board[id] !== "" || !gameActive) return;
+
+  board[id] = currentPlayer;
+  e.target.textContent = currentPlayer;
+
+  const winCombo = checkWinner();
+  if (winCombo) {
+    gameActive = false;
+    winCombo.forEach(index => {
+      document.getElementById(index + 1).classList.add("win");
+    });
+    messageDiv.textContent = `${playerNames[currentPlayer]}, congratulations you won!`;
     return;
   }
-  players = { X: p1, O: p2 };
-  messageDiv.textContent = `${players[currentPlayer]}, you're up`;
-  document.getElementById('player-form').style.display = 'none';
-  board.style.display = 'grid';
-});
 
-cells.forEach((cell, index) => {
-  cell.addEventListener('click', () => {
-    if (!gameActive || boardState[index] !== '') return;
-
-    boardState[index] = currentPlayer;
-    cell.textContent = currentPlayer;
-
-    if (checkWin()) {
-      messageDiv.textContent = `${players[currentPlayer]}, congratulations you won!`;
-      highlightWin();
-      gameActive = false;
-      return;
-    }
-
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    messageDiv.textContent = `${players[currentPlayer]}, you're up`;
-  });
-});
-
-function checkWin() {
-  return winningCombos.some(combo => {
-    const [a, b, c] = combo;
-    return boardState[a] === currentPlayer &&
-           boardState[b] === currentPlayer &&
-           boardState[c] === currentPlayer;
-  });
+  currentPlayer = currentPlayer === "x" ? "o" : "x";
+  messageDiv.textContent = `${playerNames[currentPlayer]}, you're up`;
 }
 
-function highlightWin() {
-  winningCombos.forEach(combo => {
-    const [a, b, c] = combo;
-    if (boardState[a] === currentPlayer &&
-        boardState[b] === currentPlayer &&
-        boardState[c] === currentPlayer) {
-      [a, b, c].forEach(i => cells[i].classList.add('win'));
-    }
+submitBtn.addEventListener("click", () => {
+  const name1 = player1Input.value.trim();
+  const name2 = player2Input.value.trim();
+
+  if (!name1 || !name2) {
+    alert("Please enter names for both players.");
+    return;
+  }
+
+  playerNames = { x: name1, o: name2 };
+  currentPlayer = "x";
+  board = ["", "", "", "", "", "", "", "", ""];
+  gameActive = true;
+
+  messageDiv.textContent = `${playerNames[currentPlayer]}, you're up`;
+  cells.forEach(cell => {
+    cell.textContent = "";
+    cell.classList.remove("win");
   });
-}
+
+  startScreen.style.display = "none";
+  gameBoard.style.display = "block";
+});
+
+cells.forEach(cell => cell.addEventListener("click", handleClick));
+
+// Show the start screen initially
+startScreen.style.display = "block";

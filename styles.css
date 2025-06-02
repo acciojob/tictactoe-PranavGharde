@@ -3,30 +3,22 @@ body {
   text-align: center;
 }
 
+h1 {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 2.5em;
+}
+
 .container {
   margin-top: 50px;
 }
 
-h1 {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+#start-screen, #game-board {
+  display: none;
 }
 
-#player-form {
-  margin-bottom: 20px;
-}
-
-input {
-  padding: 10px;
-  margin: 5px;
-  font-size: 16px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: 2px solid black;
-  border-radius: 10px;
-  cursor: pointer;
+.message {
+  font-size: 1.2em;
+  margin: 20px 0;
 }
 
 .board {
@@ -35,25 +27,33 @@ button {
   grid-template-rows: repeat(3, 100px);
   gap: 2px;
   justify-content: center;
-  margin: 20px auto;
+  margin: auto;
 }
 
 .cell {
   background-color: pink;
   border: 1px solid black;
-  font-size: 48px;
+  font-size: 2em;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
-.cell.win {
-  background-color: purple;
+.win {
+  background-color: purple !important;
   color: white;
 }
 
-.message {
-  font-size: 20px;
-  margin-top: 10px;
+input {
+  padding: 10px;
+  margin: 10px;
+  font-size: 1em;
+}
+
+button {
+  padding: 10px 30px;
+  font-size: 1em;
+  margin-top: 20px;
+  cursor: pointer;
 }
